@@ -5,7 +5,7 @@ The Chainlink Cross-Chain Integration Protocol (CCIP) offers a unified and strai
 
 In my opinion, the idea of implementing a smart contract as router of the protocol is the most interesting part. As you can see, a router connects the end-user with the protocol and allows end-users to use CCIP by just learning how to intereact with the router contract.
 
-<img alt="CCIP Architecture" src="https://docs.chain.link/images/ccip/ccip-diagram-04_v04.webp">
+<img alt="CCIP Basic Architecture" src="https://2422224061-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FEm7Dwh3rUCIyHWLvZwRo%2Fuploads%2FeBXc5q78HsM8SNOYHUMS%2Fbasic-architecture.png?alt=media&token=bae48b0f-ff55-49b3-857b-d8f35166266e">
 
 
 #### Router in depth:
@@ -35,6 +35,27 @@ But first get some Link tokens so you can pay the fees:
 Two ERC20 test tokens are currently available on each testnet: CCIP-BnM (burn & mint) and CCIP-LnM (lock & mint).
 
 Add CCIP-BnM to you previously connected to Avalanche Fuji wallet and then mint some tokens [here](https://docs.chain.link/ccip/test-tokens#mint-tokens-in-the-documentation)
+
+
+## Getting started:
+
+To use this code, you need to have installed [foundry](https://github.com/crisgarner/awesome-foundry) & [npm](https://nodejs.org/en)
+
+To check if you have them installed: 
+
+```shell
+# In case you have them installed you will see the versions
+$ forge --version
+$ npm --version
+
+```
+
+Install the necessary dependencies:
+
+```shell
+$ make install
+
+```
 
 
 
