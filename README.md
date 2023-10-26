@@ -96,3 +96,6 @@ $ make whitelist
 $ make transfer
 
 ```
+
+4) Check your Wallet on Sepolia network.
+- The tokens will arrive soon. As we are working with CCIP in testnets, transactions are slow.
