@@ -1,66 +1,77 @@
-## Foundry
+# <img  alt="Chainlink Logo" src="https://cryptologos.cc/logos/chainlink-link-logo.png" style="width: 40px;"> Exploring Chainlink CCIP 
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Introduction:
+The Chainlink Cross-Chain Integration Protocol (CCIP) offers a unified and straightforward platform, allowing dApps and web3 entrepreneurs to confidently fulfill their cross-chain needs.
 
-Foundry consists of:
+In my opinion, the idea of implementing a smart contract as router of the protocol is the most interesting part. As you can see, a router connects the end-user with the protocol and allows end-users to use CCIP by just learning how to intereact with the router contract.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+<img alt="CCIP Architecture" src="https://docs.chain.link/images/ccip/ccip-diagram-04_v04.webp">
 
-## Documentation
 
-https://book.getfoundry.sh/
+#### Router in depth:
+As said, the router is the contract responsible for initiating cross-chain interactions. There is one router per chain.
 
-## Usage
+When transfering tokens, the router contract routes the instruction to the destination-specific <code>OnRamp</code>. The <code>OnRamp</code> is a unique contract responsible for validating the incoming data and located within a 'lane' (the onRamp contract is more complex than that, I only intend to give a superficial description so that you can continue reading. A better explanation can be found [here](https://docs.chain.link/ccip/architecture#onramp)).
 
-### Build
+A 'lane' is an unidirectional path between a source and a destination blockchain.
+
+When receiving tokens, the router is the smart contract that sends the tokens or the message to the receiver. The router receives the data from a <code>OffRamp</code> contract. The <code>OffRamp</code> is a unique contract responsible for verifying the proof provided by the [Executing DON](https://docs.chain.link/ccip/architecture#executing-don) against a committed and blessed [Merkle root](https://en.wikipedia.org/wiki/Merkle_tree).
+
+
+## Faucets:
+If you want to experiment with CCIP, Chainlink provides a couple of allowed tokens that can be used for testing.
+
+But first get some Link tokens so you can pay the fees:
+
+1. Go to https://faucets.chain.link/.
+2. In Metamask, select the network where you want to receive testnet LINK.
+3. Click Connect wallet so the faucet app can detect the network and wallet address.
+4. If you want to receive testnet funds at a different address, paste it in the Wallet address section. This field defaults to your connected wallet address.
+5. In the Request type section, select the testnet funds that you want to receive.
+6. Complete the Captcha and click Send request. The funds are transferred from the faucet to the wallet address that you specified.
+
+#
+
+Two ERC20 test tokens are currently available on each testnet: CCIP-BnM (burn & mint) and CCIP-LnM (lock & mint).
+
+Add CCIP-BnM to you previously connected to Avalanche Fuji wallet and then mint some tokens [here](https://docs.chain.link/ccip/test-tokens#mint-tokens-in-the-documentation)
+
+
+
+## CCIP Send Tokens
+
+### Usage:
+
+#### From Avalanche Fuji to Sepolia:
+
+1) Deploy <code>CCIPTokenSender.sol</code>:
+
 
 ```shell
-$ forge build
+$ make deploy
+
 ```
 
-### Test
+2) Fund <code>CCIPTokenSender.sol</code>:
+
+- Open [Metamask](https://metamask.io/) or your wallet of preference
+
+- Send 1 Link (for fees) and the amount of CCIP-BnM you want to send
+
+3) Transfer tokens:
+
+To continue with this step, first go to the Makefile file and read carefully its comments. Make sure you modify the file before executing any make command.
+
+- First you need to white list the destination chain:
 
 ```shell
-$ forge test
+$ make whitelist 
+
 ```
 
-### Format
+- Then just transfer the tokens
 
 ```shell
-$ forge fmt
-```
+$ make transfer
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
 ```

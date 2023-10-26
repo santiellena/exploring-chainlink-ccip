@@ -6,3 +6,7 @@ remappings = [
     '@chainlink/contracts-ccip/=node_modules/@chainlink/contracts-ccip',
     '@chainlink/contracts/=lib/chainlink/contracts',
 ]
+
+[rpc_endpoints]
+ethereumSepolia = "${ETHEREUM_SEPOLIA_RPC_URL}"
+avalancheFuji = "${AVALANCHE_FUJI_RPC_URL}"
