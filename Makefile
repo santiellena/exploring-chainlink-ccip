@@ -21,4 +21,4 @@ transfer:
 
 
 install:
-	forge install smartcontractkit/chainlink --no-commit && npm install 
+	forge install smartcontractkit/chainlink --no-commit && npm install @chainlink/contracts-ccip
